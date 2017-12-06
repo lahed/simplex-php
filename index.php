@@ -29,7 +29,7 @@
                     <div class="panel-body">
                             <div class="col-md-12">
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="input-group">
                                         <label for="numero_variables" class="col-md-12 control-label">Número de Variables</label>
                                         <div class="col-md-12">
                                             <input id="numero_variables" type="number" class="form-control" name="numero_variables" required autofocus>
@@ -37,20 +37,22 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="input-group">
                                         <label for="numero_restricciones" class="col-md-12 control-label">Número de Restricciones</label>
                                         <div class="col-md-12">
                                             <input id="numero_restricciones" type="number" class="form-control" name="numero_restricciones" required autofocus>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="col-md-auto">
-                                    <button type="button" class="btn btn-primary" name="button" id="paso_1">
-                                        Aceptar
-                                    </button>
+                                <div class="col-md-6">
+                                    <br><br>
+                                    <div class="input-group">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-primary" name="button" id="paso_1">
+                                                Aceptar
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -60,7 +62,9 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Metodo Simplex</div>
                     <div class="panel-body">
-                        <div id="valores"></div>
+                        <div class="col-md-12">
+                            <div id="valores"></div>
+                        </div>
                     </div>
                 </div>
             </div>

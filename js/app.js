@@ -74,6 +74,6 @@ $( document ).ready(function() {
 
 
 
-        $('#valores').append('<button type="submit" class="btn btn-primary" id="enviar">Resolver</button>');
+        $('#valores').append('<br><br><button type="submit" class="btn btn-primary" id="enviar">Resolver</button>');
     });
 });
