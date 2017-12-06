@@ -10,7 +10,7 @@ class Simplex
     private $tableau = [];
     private $response_html = "";
     private $iteracion = 0;
-    private $MAX_ITERACIONES = 50;
+    private $MAX_ITERACIONES = 100;
     private $resultados;
     private $identificadores = [];
 
