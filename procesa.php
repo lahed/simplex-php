@@ -1,6 +1,6 @@
 <?php
 require_once('simplex.php');
-
+error_reporting(0);
 $tipo = "MAX";
 
 $num_variables = $_POST['numero_variables'];
@@ -48,6 +48,8 @@ $restricciones[] = ['valores' => [5, 1],
 'val' => 8];
 */
 
+$Z = [3.2, 2.4];
+
 $restricciones[] = ['valores' => [8, 5],
 'val' => 200];
 
@@ -88,7 +90,7 @@ $simple = new Simplex($tipo, $num_variables, $num_restricciones, $Z, $restriccio
     </div>
 
 
-   
+
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/select2.min.js"></script>
