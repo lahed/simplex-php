@@ -48,17 +48,6 @@ $restricciones[] = ['valores' => [5, 1],
 'val' => 8];
 */
 
-$Z = [3.2, 2.4];
-
-$restricciones[] = ['valores' => [8, 5],
-'val' => 200];
-
-$restricciones[] = ['valores' => [5, 4],
-'val' => 140];
-
-$restricciones[] = ['valores' => [5, 7],
-'val' => 175];
-
 $simple = new Simplex($tipo, $num_variables, $num_restricciones, $Z, $restricciones);
 ?>
 
