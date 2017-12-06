@@ -48,8 +48,6 @@ $restricciones[] = ['valores' => [5, 1],
 'val' => 8];
 */
 
-$Z = [3.2, 2.4];
-
 $restricciones[] = ['valores' => [8, 5],
 'val' => 200];
 
