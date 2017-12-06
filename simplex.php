@@ -21,7 +21,7 @@ class Simplex
         $this->num_restricciones = $num_restricciones;
         $this->z = $z;
         $this->restricciones = $restricciones;
-        $this->total_variables = $num_restricciones * 2;    
+        $this->total_variables = $num_restricciones * 2;
 
         $this->iniciar();
     }
@@ -31,7 +31,7 @@ class Simplex
         //RESTRICCIONES - TABLEU
         for($f=0;$f<$this->num_restricciones;$f++)
         {
-            array_push($this->identificadores, "X".(($this->num_restricciones+1)+$f));            
+            array_push($this->identificadores, "X".(($this->num_restricciones+1)+$f));
             $this->tableau[0][$f] = [0];
             for($i=0;$i<$this->num_variables;$i++){
                 array_push($this->tableau[0][$f], $this->restricciones[$f]['valores'][$i]);
@@ -46,7 +46,7 @@ class Simplex
                 }else{
                     array_push($this->tableau[0][$f], 0);
                 }
-                
+
             }
 
             //VALOR
@@ -89,14 +89,19 @@ class Simplex
 
     private function buscar_resultado()
     {
-        while(!$this->hay_resultado() && $this->iteracion<=$this->MAX_ITERACIONES)
+        $iteracion_final = 0;
+        while(!$this->hay_resultado() && $this->iteracion <= $this->MAX_ITERACIONES)
         {
             $this->iteracion();
+
             $this->variable_entrante();
 
-            $this->imprimir_tabla($this->iteracion);
+            $final = $this->imprimir_tabla($this->iteracion);
+
+            $iteracion_final += 1;
         }
-        $this->response_html .= "RESULTADO!";
+
+        $this->response_html .= '';
     }
 
     private function variable_entrante()
@@ -106,7 +111,7 @@ class Simplex
         $this->identificadores[$fila_pivote] = "X$columna_pivote";
 
         $elemento_pivote = $this->tableau[$this->iteracion][$fila_pivote][$columna_pivote];
-        
+
         //Dividimos la nueva fila con el elemento pivote
         for($i=0;$i<count($this->tableau[$this->iteracion][$fila_pivote]);$i++)
         {
@@ -120,12 +125,12 @@ class Simplex
             //Excluyo fila nueva
             if($i==$fila_pivote)
                 continue;
-            
+
             $coeficiente_pivote = $this->tableau[$this->iteracion][$i][$columna_pivote];
-            
+
             for($c=0;$c<count($this->tableau[$this->iteracion][$fila_pivote]);$c++)
-            {       
-               // echo $this->tableau[$this->iteracion-1][$i][$c]."- (".$coeficiente_pivote. " * ".$this->tableau[$this->iteracion][$fila_pivote][$c].") -";         
+            {
+               // echo $this->tableau[$this->iteracion-1][$i][$c]."- (".$coeficiente_pivote. " * ".$this->tableau[$this->iteracion][$fila_pivote][$c].") -";
                 $this->tableau[$this->iteracion][$i][$c] = $this->tableau[$this->iteracion-1][$i][$c] - ($coeficiente_pivote * $this->tableau[$this->iteracion][$fila_pivote][$c]);
             }
            // echo "<br>";
@@ -142,32 +147,48 @@ class Simplex
 
     private function imprimir_tabla($index)
     {
-        $ret = "
-        <table class='table'>
+
+        $ret = '
+        <div class="container">
+        <div class="row">
+        <div class="col-md-12" style="margin-top:100px">
+        <div class="panel panel-primary">
+        <div class="panel-heading">Iteración '. $index .'</div>
+        <div class="panel-body">
+        <table class="table">
         <tr>
         <th></th>
-        <th>Z</th>";
-    
+        <th>Z</th>';
+
         for($i=1;$i<$this->num_variables+$this->num_restricciones+1;$i++)
         {
             $ret .= "<th>X$i</th>";
         }
-        $ret .= "
+        $ret .= '
         <th>LD</th>
-        </tr>";
-    
-        for($i=0;$i<$this->num_restricciones+1;$i++)
+        </tr>';
+
+        for($i = 0; $i < $this->num_restricciones + 1; $i++)
         {
             $ret .= "<tr>";
             $ret .= "<th>".$this->identificadores[$i]."</th>";
-            for($c=0;$c<($this->num_restricciones+$this->num_variables+2);$c++){
+            for($c = 0; $c < ($this->num_restricciones + $this->num_variables + 2); $c++)
+            {
                 $ret .= "<td>{$this->tableau[$index][$i][$c]}</td>";
+
             }
+
             $ret .= "</tr>";
         }
-    
-        $ret .= "</table>";
-    
+
+        $ret .= '</table>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        ';
+
         $this->response_html .= $ret;
     }
 
